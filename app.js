@@ -1,135 +1,24 @@
-// STATE — Uygulamanın tüm verisi burada
+// Constants
 
-// localStorage'dan yükle, yoksa boş başla
-let objects = JSON.parse(localStorage.getItem('seesaw-objects')) || []
+const PLANK_WIDTH = 400
+const PIVOT = PLANK_WIDTH / 2
 
-// State'i localStorage'a kaydet
-function saveState() {
-  localStorage.setItem('seesaw-objects', JSON.stringify(objects))
-}
+// State
 
+let objectList = [] // will store all dropped objects
+let isPaused = false // tracks whether simulation is paused
 
-// FİZİK — Tork hesaplama
-
-const PLANK_WIDTH = 400  // tahtanın piksel genişliği
-const PIVOT_PX    = 200  // pivot tahtanın tam ortasında
-
-function calculateAngle() {
-  let leftTorque  = 0
-  let rightTorque = 0
-
-  objects.forEach(obj => {
-    // obj.position: 0 (sol uç) → 400 (sağ uç)
-    // mesafe: pivot'tan kaç piksel uzakta
-    const distance = Math.abs(obj.position - PIVOT_PX)
-
-    if (obj.position < PIVOT_PX) {
-      // Sol taraf
-      leftTorque += obj.weight * distance
-    } else {
-      // Sağ taraf
-      rightTorque += obj.weight * distance
+// Load saved state from localStorage on page load
+function loadState () {
+    const saved = local.Storage.getItem('seesaw-state')
+    if(saved) {
+        objectList = JSON.parse(saved)
     }
-  })
-
-  // Açı hesapla, ±30 ile sınırla
-  const angle = Math.max(-30, Math.min(30,
-    (rightTorque - leftTorque) / 10
-  ))
-
-  return { angle, leftTorque, rightTorque }
 }
 
+ // Save current state to localStorage
+ function saveState() {
+    // TODO: implement
+ }
 
-// RENDER — Ekrana çiz
-
-const plank      = document.getElementById('plank')
-const leftInfo   = document.getElementById('left-weight')
-const rightInfo  = document.getElementById('right-weight')
-
-// Renk paleti — her nesne farklı renkte olsun
-const COLORS = [
-  '#e94560', '#4ecdc4', '#f7dc6f',
-  '#a29bfe', '#fd79a8', '#6c5ce7',
-  '#00b894', '#fdcb6e', '#e17055'
-]
-
-function render() {
-  // 1. Açıyı hesapla
-  const { angle, leftTorque, rightTorque } = calculateAngle()
-
-  // 2. Tahtayı döndür
-  plank.style.transform = `translateX(-50%) rotate(${angle}deg)`
-
-  // 3. Eski nesneleri temizle
-  plank.querySelectorAll('.object').forEach(el => el.remove())
-
-  // 4. Sol/sağ ağırlıkları göster
-  const leftKg  = objects
-    .filter(o => o.position < PIVOT_PX)
-    .reduce((sum, o) => sum + o.weight, 0)
-
-  const rightKg = objects
-    .filter(o => o.position >= PIVOT_PX)
-    .reduce((sum, o) => sum + o.weight, 0)
-
-  leftInfo.textContent  = `Left: ${leftKg} kg`
-  rightInfo.textContent = `Right: ${rightKg} kg`
-
-  // 5. Her nesneyi çiz
-  objects.forEach((obj, index) => {
-    const el = document.createElement('div')
-    el.className = 'object'
-
-    // Boyutu ağırlığa göre ayarla (min 24px, max 48px)
-    const size = 24 + obj.weight * 2.4
-    el.style.width  = size + 'px'
-    el.style.height = size + 'px'
-    el.style.fontSize = Math.max(10, size / 3.5) + 'px'
-
-    // Renk — index'e göre döngüsel
-    el.style.background = COLORS[index % COLORS.length]
-
-    // Pozisyon — tahtanın solundan kaç piksel
-    el.style.left = obj.position + 'px'
-
-    // Ağırlığı göster
-    el.textContent = obj.weight + 'kg'
-
-    plank.appendChild(el)
-  })
-}
-
-
-// CLICK — Tahtaya tıklanınca
-
-plank.addEventListener('click', function(event) {
-  // Tahtanın sol kenarından tıklanan nokta kaç piksel?
-  const rect = plank.getBoundingClientRect()
-  const clickX = event.clientX - rect.left
-
-  // 0 ile 400 arasında sınırla
-  const position = Math.max(0, Math.min(PLANK_WIDTH, clickX))
-
-  // Rastgele ağırlık: 1 ile 10 arasında tam sayı
-  const weight = Math.floor(Math.random() * 10) + 1
-
-  // Nesneyi listeye ekle
-  objects.push({ position, weight })
-
-  // Kaydet ve yeniden çiz
-  saveState()
-  render()
-})
-
-
-// RESET — Sıfırla
-
-document.getElementById('reset-btn').addEventListener('click', function() {
-  objects = []
-  saveState()
-  render()
-})
-
-// BAŞLAT — Sayfa açılınca render et
-render()
+ localState()
