@@ -99,3 +99,25 @@ function render() {
     plank.appendChild(el)
   })
 }
+
+
+// CLICK — Tahtaya tıklanınca
+
+plank.addEventListener('click', function(event) {
+  // Tahtanın sol kenarından tıklanan nokta kaç piksel?
+  const rect = plank.getBoundingClientRect()
+  const clickX = event.clientX - rect.left
+
+  // 0 ile 400 arasında sınırla
+  const position = Math.max(0, Math.min(PLANK_WIDTH, clickX))
+
+  // Rastgele ağırlık: 1 ile 10 arasında tam sayı
+  const weight = Math.floor(Math.random() * 10) + 1
+
+  // Nesneyi listeye ekle
+  objects.push({ position, weight })
+
+  // Kaydet ve yeniden çiz
+  saveState()
+  render()
+})
