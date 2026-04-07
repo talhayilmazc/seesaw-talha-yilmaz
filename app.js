@@ -121,3 +121,15 @@ plank.addEventListener('click', function(event) {
   saveState()
   render()
 })
+
+
+// RESET — Sıfırla
+
+document.getElementById('reset-btn').addEventListener('click', function() {
+  objects = []
+  saveState()
+  render()
+})
+
+// BAŞLAT — Sayfa açılınca render et
+render()
