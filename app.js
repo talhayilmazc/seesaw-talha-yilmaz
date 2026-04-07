@@ -5,20 +5,20 @@ const PIVOT = PLANK_WIDTH / 2
 
 // State
 
-let objectList = [] // will store all dropped objects
+let objects = [] // will store all dropped objects
 let isPaused = false // tracks whether simulation is paused
 
 // Load saved state from localStorage on page load
-function loadState () {
-    const saved = local.Storage.getItem('seesaw-state')
-    if(saved) {
-        objectList = JSON.parse(saved)
+function loadState() {
+    const saved = localStorage.getItem('seesaw-state')
+    if (saved) {
+        objects = JSON.parse(saved)
     }
 }
 
  // Save current state to localStorage
  function saveState() {
-    // TODO: implement
+    localStorage.setItem('seesaw-state', JSON.stringify(objects))
  }
 
- localState()
+ loadState()
