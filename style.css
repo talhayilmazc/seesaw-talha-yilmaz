@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #1a1a2e;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+h1 {
+  margin-bottom: 24px;
+  font-size: 28px;
+  color: #e94560;
+}
+
+/* Sol/Sağ ağırlık göstergeleri */
+#info {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+#left-weight  { color: #4ecdc4; }
+#right-weight { color: #ff6b6b; }
+
+/* Sahne — tahterevalli burada duruyor */
+#scene {
+  position: relative;
+  width: 500px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Pivot — üçgen ayak */
+#pivot {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #e94560;
+  z-index: 1;
+}
+
+/* Tahta — dönen kısım */
+#plank {
+  position: absolute;
+  bottom: 40px;       /* pivot'un üstünde */
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  transform-origin: center center;
+  width: 400px;
+  height: 16px;
+  background: #c8a96e;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.6s ease;  /* yumuşak animasyon */
+  z-index: 2;
+}
+
+/* Nesneler — tahta üzerindeki toplar */
+.object {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+  pointer-events: none;  /* tıklamayı engelleme */
+  transform: translateX(-50%);
+  bottom: 16px;          /* tahtanın üstünde dur */
+}
+
+/* Reset butonu */
+#reset-btn {
+  margin-top: 40px;
+  padding: 10px 30px;
+  background: #e94560;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#reset-btn:hover {
+  background: #c73652;
+}
