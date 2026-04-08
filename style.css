@@ -127,3 +127,34 @@ h1 {
     background: #4ecdc4;
     color: #1a1a2e;
 }
+
+/* Distance Grid */
+#grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.grid-mark {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+
+.grid-line {
+    width: 1px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.grid-label {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 2px;
+    white-space: nowrap;
+}
