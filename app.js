@@ -114,3 +114,35 @@ function loadState() {
         plank.appendChild(el)
     })
  }
+
+ // User Interaction
+
+ // Handle click on the plank to drop a new object
+ plank.addEventListener('click', function(event) {
+    // Skip if simulation paused
+    if (isPaused) return
+
+    // Get click position relative to the plank
+    const clickX = event.offsetX
+
+    // Keep position within plank boundaries
+    const position = Math.max(0, Math.min(PLANK_WIDTH, clickX))
+
+    // Generate random weight between 1 and 10
+    const weight = Math.floor(Math.random() * 10) + 1
+
+    // Add new object to state
+    objects.push({
+        position: position,
+        weight: weight
+    })
+
+    // Save and re-render
+    saveState()
+    render()
+ })
+
+ // Initial Render
+
+ // Render on page load to restore saved state
+ render()
