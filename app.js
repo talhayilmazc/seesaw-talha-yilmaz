@@ -146,3 +146,20 @@ function loadState() {
 
  // Render on page load to restore saved state
  render()
+
+ // Pause / Resume
+
+ const pauseBtn = document.getElementById('pause-btn')
+
+ //  Toggle pause state on button click
+ pauseBtn.addEventListener('click', function() {
+    isPaused = !isPaused
+
+    // Update button text based on state
+    if (isPaused) {
+        pauseBtn.textContent = 'Resume'
+    }
+    else {
+        pauseBtn.textContent = 'Pause'
+    }
+ })
