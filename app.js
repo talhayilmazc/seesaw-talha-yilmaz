@@ -65,9 +65,53 @@ function loadState() {
  // Color palette for dropped objects
  const COLORS = [ '#e94560', '#4ecdc4', '#f7dc6f','#a29bfe', '#fd79a8', '#00b894','#6c5ce7', '#fdcb6e', '#e17055' ]
 
+// Distance Grid
+
+// Draw distance markers on the plank
+function drawGrid() {
+    const grid = document.getElementById('grid')
+    grid.innerHTML = ''
+
+    // Place a marker every 50px along the plank
+    for (let px = 0; px <= PLANK_WIDTH; px += 50) {
+        const mark = document.createElement('div')
+        mark.className = 'grid-mark'
+        mark.style.left = px + 'px'
+
+        // Calculate distance from pivot
+        const distance = Math.abs(px - PIVOT)
+
+        // Label shows side and distance
+        let label = ''
+        if (px < PIVOT) {
+            label = 'L' + distance
+        }
+        else if (px > PIVOT) {
+            label = 'R' + distance
+        }
+        else {
+            label = '0'
+        }
+
+        const line = document.createElement('div')
+        line.className = 'grid-line'
+
+        const text = document.createElement('div')
+        text.className = 'grid-label'
+        text.textContent = label
+
+        mark.appendChild(line)
+        mark.appendChild(text)
+        grid.appendChild(mark)
+    }
+}
+
  // Render
 
  function render() {
+    // Draw distance grid
+    drawGrid()
+
     //Calculate current angle
     const {angle} = calculateAngle()
 
