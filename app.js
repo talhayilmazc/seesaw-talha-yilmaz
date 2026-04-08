@@ -196,3 +196,23 @@ function loadState() {
     oscillator.start(audioCtx.currentTime)
     oscillator.stop(audioCtx.currentTime + 0.3)
  }
+
+ // Reset
+
+ const resetBtn = document.getElementById('reset-btn')
+
+ // Clear all objects and reset simulation
+ resetBtn.addEventListener('click', function() {
+    //empty the object array
+    objects = []
+
+    // Clear localStorage
+    localStorage.removeItem('seesaw-state')
+
+    // Reset pause state
+    isPaused = false
+    pauseBtn.textContent = 'Pause'
+
+    // Re-render empty seesawS
+    render()
+ })
