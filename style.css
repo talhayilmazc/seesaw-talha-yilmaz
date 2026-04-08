@@ -44,6 +44,10 @@ h1 {
     color: #f7dc6f;
 }
 
+#next-info {
+    color: #fd79a8;
+}
+
 /* Seesaw Scene Container */
 #scene {
     position: relative;
