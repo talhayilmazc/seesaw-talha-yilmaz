@@ -40,6 +40,10 @@ h1 {
     color: #ff6b6b;
 } 
 
+#angle-info {
+    color: #f7dc6f;
+}
+
 /* Seesaw Scene Container */
 #scene {
     position: relative;
