@@ -62,6 +62,7 @@ function loadState() {
  const leftInfo = document.getElementById('left-info')
  const rightInfo = document.getElementById('right-info')
  const angleInfo = document.getElementById('angle-info')
+ const logList = document.getElementById('log-list')
 
  // Color palette for dropped objects
  const COLORS = [ '#e94560', '#4ecdc4', '#f7dc6f','#a29bfe', '#fd79a8', '#00b894','#6c5ce7', '#fdcb6e', '#e17055' ]
@@ -182,6 +183,14 @@ function drawGrid() {
         position: position,
         weight: weight
     })
+
+    // Add entry to acticity log
+    const side = position < PIVOT ? 'left' : 'right'
+    const distance = Math.round(Math.abs(position - PIVOT))
+
+    const logItem = document.createElement('li')
+    logItem.textContent = weight + 'kg added - ' + side + ' side' + distance + 'px from pivot'
+    logList.insertBefore(logItem, logList.firstChild)
     
     // Play sound when object is dropped
     playDropSound()
