@@ -61,6 +61,7 @@ function loadState() {
  const plank = document.getElementById('plank')
  const leftInfo = document.getElementById('left-info')
  const rightInfo = document.getElementById('right-info')
+ const angleInfo = document.getElementById('angle-info')
 
  // Color palette for dropped objects
  const COLORS = [ '#e94560', '#4ecdc4', '#f7dc6f','#a29bfe', '#fd79a8', '#00b894','#6c5ce7', '#fdcb6e', '#e17055' ]
@@ -138,6 +139,7 @@ function drawGrid() {
     //Update weight display
     leftInfo.textContent = 'Left: ' + leftTotal + ' kg'
     rightInfo.textContent = 'Right: ' + rightTotal + ' kg'
+    angleInfo.textContent = 'Angle: ' + angle.toFixed(1) + '°'
 
     // Draw each object on the plank
     objects.forEach(function(obj, index) {
