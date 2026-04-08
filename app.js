@@ -7,7 +7,7 @@ const PIVOT = PLANK_WIDTH / 2
 
 let objects = [] // Will store all dropped objects
 let isPaused = false // Tracks whether simulation is paused
-let nextWeight = Math.floor(Math.random() * 10) + 1 // Pre-generate the next pbject weight to show preview
+let nextWeight = Math.floor(Math.random() * 10) + 1 // Pre-generate the next object weight to show preview
 
 // Load saved state from localStorage on page load
 function loadState() {
@@ -194,7 +194,7 @@ function drawGrid() {
     const distance = Math.round(Math.abs(position - PIVOT))
 
     const logItem = document.createElement('li')
-    logItem.textContent = weight + 'kg added - ' + side + ' side' + distance + 'px from pivot'
+    logItem.textContent = weight + 'kg added - ' + side + ' side ' + distance + 'px from pivot'
     logList.insertBefore(logItem, logList.firstChild)
     
     // Play sound when object is dropped
@@ -263,8 +263,11 @@ function drawGrid() {
 
  // Clear all objects and reset simulation
  resetBtn.addEventListener('click', function() {
-    //empty the object array
+    // Empty the object array
     objects = []
+
+    // Clear log list
+    logList.innerHTML = ''
 
     // Clear localStorage
     localStorage.removeItem('seesaw-state')
