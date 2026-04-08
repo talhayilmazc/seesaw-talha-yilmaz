@@ -3,6 +3,7 @@
     padding: border-box
 }
 
+/* Body Layout */
 body {
     background: #1a1a2e;
     font-family: Arial, sans-serif;
@@ -14,6 +15,7 @@ body {
     padding: 60px 20px;
 }
 
+/* Page Title */
 h1 {
     font-size: 32px;
     color: #e94560;
@@ -21,7 +23,7 @@ h1 {
     letter-spacing: 1px;
 }
 
-/* Sol sağ ağırlık bilgisi */
+/* Weight Info Display */
 #info {
     display: flex;
     font-size: 20px;
@@ -38,7 +40,7 @@ h1 {
     color: #ff6b6b;
 } 
 
-/* Tahterevalli sahne görünümü */
+/* Seesaw Scene Container */
 #scene {
     position: relative;
     width: 500px;
@@ -48,7 +50,7 @@ h1 {
     justify-content: center;
 }
 
-/* Üçgen pivot */
+/* Triangle Pivot */
 #pivot {
     position: absolute;
     width: 0;
@@ -62,7 +64,7 @@ h1 {
     z-index: 1;
 }
 
-/* Tahta */
+/* Plank Board */
 #plank {
     cursor: pointer;
     background: linear-gradient(to bottom, #d4a853, #b8860b);
@@ -78,7 +80,7 @@ h1 {
     z-index: 2;
 }
 
-/* Nesneler */
+/* Weight Objects */
 .weight-obj {
     position: absolute;
     display: flex;
@@ -95,7 +97,7 @@ h1 {
     pointer-events: none;
 }
 
-/* Butonlar */
+/* Control Buttons */
 #controls {
     display: flex;
     margin-top: 50px;
