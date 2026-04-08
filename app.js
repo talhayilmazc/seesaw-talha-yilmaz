@@ -174,10 +174,10 @@ function loadState() {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 
     // Create oscillator - generates the sound wave
-    const oscillator = audioCtx.Ctx.createOscillator()
+    const oscillator = audioCtx.createOscillator()
 
     // Create gain node - controls volume
-    const gainNode = audioCtx.Ctx.createGain()
+    const gainNode = audioCtx.createGain()
 
     // Connect oscillator -> gain -> output
     oscillator.connect(gainNode)
@@ -185,11 +185,11 @@ function loadState() {
 
     // Sound type and frequency
     oscillator.type = 'sine'
-    oscillator.frequency.setValueTime(300, audioCtx.currentTime)
+    oscillator.frequency.setValueAtTime(300, audioCtx.currentTime)
     oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime +0.3)
 
     // Volume starts at 0.3 and fades out
-    gainNode.gain.setValueTime(0.3, audioCtx.currentTime)
+    gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime)
     gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3)
 
     // Stars and stop
