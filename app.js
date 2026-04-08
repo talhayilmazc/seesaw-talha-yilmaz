@@ -136,6 +136,9 @@ function loadState() {
         position: position,
         weight: weight
     })
+    
+    // Play sound when object is dropped
+    playDropSound()
 
     // Save and re-render
     saveState()
@@ -163,3 +166,33 @@ function loadState() {
         pauseBtn.textContent = 'Pause'
     }
  })
+
+ // Sound Effect
+
+ // Create a short drop sound with Web Audio API
+ function playDropSound() {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+
+    // Create oscillator - generates the sound wave
+    const oscillator = audioCtx.Ctx.createOscillator()
+
+    // Create gain node - controls volume
+    const gainNode = audioCtx.Ctx.createGain()
+
+    // Connect oscillator -> gain -> output
+    oscillator.connect(gainNode)
+    gainNode.connect(audioCtx.destination)
+
+    // Sound type and frequency
+    oscillator.type = 'sine'
+    oscillator.frequency.setValueTime(300, audioCtx.currentTime)
+    oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime +0.3)
+
+    // Volume starts at 0.3 and fades out
+    gainNode.gain.setValueTime(0.3, audioCtx.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3)
+
+    // Stars and stop
+    oscillator.start(audioCtx.currentTime)
+    oscillator.stop(audioCtx.currentTime + 0.3)
+ }
