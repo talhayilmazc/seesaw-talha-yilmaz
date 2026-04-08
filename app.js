@@ -5,8 +5,9 @@ const PIVOT = PLANK_WIDTH / 2
 
 // State
 
-let objects = [] // will store all dropped objects
-let isPaused = false // tracks whether simulation is paused
+let objects = [] // Will store all dropped objects
+let isPaused = false // Tracks whether simulation is paused
+let nextWeight = Math.floor(Math.random() * 10) + 1 // Pre-generate the next pbject weight to show preview
 
 // Load saved state from localStorage on page load
 function loadState() {
@@ -63,6 +64,7 @@ function loadState() {
  const rightInfo = document.getElementById('right-info')
  const angleInfo = document.getElementById('angle-info')
  const logList = document.getElementById('log-list')
+ const nextInfo = document.getElementById('next-info')
 
  // Color palette for dropped objects
  const COLORS = [ '#e94560', '#4ecdc4', '#f7dc6f','#a29bfe', '#fd79a8', '#00b894','#6c5ce7', '#fdcb6e', '#e17055' ]
@@ -141,6 +143,7 @@ function drawGrid() {
     leftInfo.textContent = 'Left: ' + leftTotal + ' kg'
     rightInfo.textContent = 'Right: ' + rightTotal + ' kg'
     angleInfo.textContent = 'Angle: ' + angle.toFixed(1) + '°'
+    nextInfo.textContent = 'Next: ' + nextWeight + ' kg'
 
     // Draw each object on the plank
     objects.forEach(function(obj, index) {
@@ -175,8 +178,10 @@ function drawGrid() {
     // Keep position within plank boundaries
     const position = Math.max(0, Math.min(PLANK_WIDTH, clickX))
 
-    // Generate random weight between 1 and 10
-    const weight = Math.floor(Math.random() * 10) + 1
+    // Generate next weight for preview
+    const weight = nextWeight
+    nextWeight = Math.floor(Math.random() * 10) + 1
+    nextInfo.textContent = 'Next: ' + nextWeight + ' kg'
 
     // Add new object to state
     objects.push({
