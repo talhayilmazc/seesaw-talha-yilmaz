@@ -72,8 +72,7 @@ function loadState() {
     const {angle} = calculateAngle()
 
     //Rotate the plank smoothly
-    plank.style.transform = 'translateX(-50%) rotate(${angle}deg'
-
+    plank.style.transform = `translateX(-50%) rotate(${angle}deg)`
     // Remove all existing objects from plank
     plank.querySelectorAll('.weight-obj').forEach(function(el) {
         el.remove()
